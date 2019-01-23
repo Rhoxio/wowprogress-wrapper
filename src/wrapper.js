@@ -37,17 +37,33 @@ class WarcraftLogsRequest {
   // // // // // // // //
   // Data Retrieval
   // // // // // // // //
-  
+
   getZones(next){
     request(this.zoneUrl(), (error, reponse, body) => {
-      next(body)
+      let res = this.handleResponse(JSON.parse(body))
+      if(res.success){
+        next(res)  
+      }      
     })
   }
 
   getClasses(next){
     request(this.classUrl(), (error, reponse, body) => {
-      next(body)
+      let res = this.handleResponse(JSON.parse(body))
+      if(res.success){
+        next(res)  
+      }
     })
+  }
+
+  // Handle Errors
+
+  handleResponse(res){
+    if(res.hasOwnProperty('error')){
+      throw `Invalid Request to WarcraftLogs: ${res.status} - ${res.error}`
+    } else {
+      return {"success": true, "body": res}
+    }
   }
 
 }
