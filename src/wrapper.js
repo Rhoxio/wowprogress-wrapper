@@ -7,7 +7,7 @@ class WarcraftLogsRequest {
     // Straight from env for the moment.
     this.privateKey = process.env.WARCRAFTLOGS_PRIVATE_KEY
     this.publicKey = process.env.WARCRAFTLOGS_PUBLIC_KEY
-    this.version = process.env.API_VERSION
+    this.version = process.env.WARCRAFTLOGS_API_VERSION
   }
 
   // // // // // // // 
